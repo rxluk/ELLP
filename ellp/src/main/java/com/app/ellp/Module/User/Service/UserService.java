@@ -1,7 +1,7 @@
 package com.app.ellp.Module.User.Service;
 
-import com.app.ellp.Module.User.DTOs.LoginResponseDTO;
-import com.app.ellp.Module.User.DTOs.RegisterDTO;
+import com.app.ellp.Module.User.DTOs.ResponseLoginDTO;
+import com.app.ellp.Module.User.DTOs.CreateUserDTO;
 import com.app.ellp.Module.User.Domain.User;
 import com.app.ellp.Module.User.Repository.UserRepository;
 import com.app.ellp.Security.TokenService;
@@ -30,7 +30,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User register(RegisterDTO json) {
+    public User register(CreateUserDTO json) {
         if (userRepository.findByLogin(json.login()) != null) {
             throw new IllegalArgumentException("Usuário já existe!");
         }
@@ -40,7 +40,7 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    public LoginResponseDTO login(String login, String password) {
+    public ResponseLoginDTO login(String login, String password) {
         Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(login, password)
         );
@@ -48,7 +48,7 @@ public class UserService {
         User user = (User) auth.getPrincipal();
         String token = tokenService.generateToken(user);
 
-        return new LoginResponseDTO(token);
+        return new ResponseLoginDTO(token);
     }
 
     public Optional<UserDetails> findByLogin(String login) {
@@ -64,7 +64,7 @@ public class UserService {
         userRepository.deleteByLogin(login);
     }
     @Transactional
-    public User updateUserByLogin(String login, RegisterDTO json) {
+    public User updateUserByLogin(String login, CreateUserDTO json) {
         Optional<User> optionalUser = Optional.of((User) userRepository.findByLogin(login));
         if (optionalUser.isEmpty()) {
             throw new UsernameNotFoundException("Usuário não encontrado!");

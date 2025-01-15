@@ -1,6 +1,6 @@
 package com.app.ellp.Module.User.Controller;
 
-import com.app.ellp.Module.User.DTOs.RegisterDTO;
+import com.app.ellp.Module.User.DTOs.CreateUserDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -39,7 +39,7 @@ public interface UserDocumentation {
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
     })
-    ResponseEntity<Object> atualizarUsuario(@PathVariable String login, @RequestBody @Valid RegisterDTO registerDTO);
+    ResponseEntity<Object> atualizarUsuario(@PathVariable String login, @RequestBody @Valid CreateUserDTO createUserDTO);
 
     @Operation(summary = "Busca todos os usuários com senha inclusa", method = "GET")
     @ApiResponses(value = {

@@ -2,6 +2,8 @@ package com.app.ellp.Module.User.Domain;
 
 import com.app.ellp.Module.User.Enums.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,9 +24,16 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
+    @Column(nullable = false, unique = true)
+    @NotBlank
+    @Size(min = 4, max = 50)
     private String login;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public User() {
@@ -38,8 +47,9 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return role.getPermissions().stream()
+                .map(SimpleGrantedAuthority::new)
+                .toList();
     }
 
     @Override

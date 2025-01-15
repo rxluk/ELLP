@@ -1,7 +1,7 @@
 package com.app.ellp.Module.User.Controller;
 
 import com.app.ellp.Module.User.DTOs.DetailUserDTO;
-import com.app.ellp.Module.User.DTOs.RegisterDTO;
+import com.app.ellp.Module.User.DTOs.CreateUserDTO;
 import com.app.ellp.Module.User.Domain.User;
 import com.app.ellp.Module.User.Service.UserService;
 import jakarta.validation.Valid;
@@ -54,8 +54,8 @@ public class UserController extends BaseUserController implements UserDocumentat
     }
 
     @PutMapping("/put/{login}")
-    public ResponseEntity<Object> atualizarUsuario(@PathVariable String login, @RequestBody @Valid RegisterDTO registerDTO) {
-        userService.updateUserByLogin(login, registerDTO);
+    public ResponseEntity<Object> atualizarUsuario(@PathVariable String login, @RequestBody @Valid CreateUserDTO createUserDTO) {
+        userService.updateUserByLogin(login, createUserDTO);
         return ResponseEntity.ok("Usuario atualizado com sucesso!");
     }
 

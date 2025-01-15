@@ -23,7 +23,7 @@ public class SecurityConfig {
     @Autowired
     SecurityFilter securityFilter;
 
-    private static final String[] PERMIT_ALL= {
+    private static final String[] PERMIT_ALL = {
             "/swagger-ui/**",
             "/v3/api-docs/**",
             "/swagger-ui.html",
@@ -37,12 +37,20 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        // Rotas permitidas a todos
                         .requestMatchers(PERMIT_ALL).permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user/get").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "user/delete").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/put").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/auth/register/user").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/register/colaborador").permitAll()
+
+                        // Rotas acessíveis apenas por ADMIN
+                        .requestMatchers(HttpMethod.GET, "/getByEmail/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/getById/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/getAll").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/deleteById/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/updateById/**").hasRole("ADMIN")
+
+                        // Qualquer outra rota requer autenticação
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
