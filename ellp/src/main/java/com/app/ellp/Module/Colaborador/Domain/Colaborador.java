@@ -1,27 +1,27 @@
 package com.app.ellp.Module.Colaborador.Domain;
 
 import com.app.ellp.Module.User.Domain.User;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.index.Indexed;
 
-@Table(name = "colaborador")
-@Entity(name = "colaborador")
+@Document(collection = "colaborador")
 public class Colaborador {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Long id;
-    @Column(nullable = false)
+    private String id;
+    
     @Size(min = 3, max = 255)
     private String nome;
-    @Column(unique = true, nullable = false)
+    
+    @Indexed(unique = true)
     private String email;
-    @Column(unique = true, nullable = false)
+    
+    @Indexed(unique = true)
     private String registro;
-    @OneToOne
-    @JoinColumn(name = "users_id")
+    
+    @DBRef
     private User user;
 
     public Colaborador() {
@@ -42,19 +42,19 @@ public class Colaborador {
         this.user = user;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public @Size(min = 3, max = 255) String getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(@Size(min = 3, max = 255) String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
