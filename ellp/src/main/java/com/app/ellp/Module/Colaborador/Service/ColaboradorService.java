@@ -6,7 +6,6 @@ import com.app.ellp.Module.Colaborador.Repository.ColaboradorRepository;
 import com.app.ellp.Module.User.DTOs.CreateUserDTO;
 import com.app.ellp.Module.User.Domain.User;
 import com.app.ellp.Module.User.Service.UserService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class ColaboradorService {
         throw new UsernameNotFoundException("Usuário não encontrado!");
     }
 
-    public Colaborador findById(Long id) {
+    public Colaborador findById(String id) {
         Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
         if(colaborador.isPresent()) return colaborador.get();
         throw new UsernameNotFoundException("Usuário não encontrado!");
@@ -51,8 +50,7 @@ public class ColaboradorService {
         return colaboradorRepository.save(colaborador);
     }
 
-    @Transactional
-    public Colaborador updateById(Long id, CreateColaboradorDTO json) {
+    public Colaborador updateById(String id, CreateColaboradorDTO json) {
         Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
         if(!colaborador.isPresent())
             throw new UsernameNotFoundException("Usuário não encontrado!");
@@ -69,8 +67,8 @@ public class ColaboradorService {
         }
         throw new RuntimeException("Erro ao atualizar os dados!");
     }
-    @Transactional
-    public void deleteById(Long id) {
+
+    public void deleteById(String id) {
         Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
         if(!colaborador.isPresent())
             throw new UsernameNotFoundException("Usuário não encontrado!");
