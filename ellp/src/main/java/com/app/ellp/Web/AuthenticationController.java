@@ -6,13 +6,14 @@ import com.app.ellp.Module.User.DTOs.RequestLoginDTO;
 import com.app.ellp.Module.User.DTOs.ResponseLoginDTO;
 import com.app.ellp.Module.User.DTOs.CreateUserDTO;
 import com.app.ellp.Module.User.Service.UserService;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("auth")
 public class AuthenticationController implements AuthenticationDocumentation {
 
     @Autowired

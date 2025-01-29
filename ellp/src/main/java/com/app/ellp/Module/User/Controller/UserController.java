@@ -4,6 +4,8 @@ import com.app.ellp.Module.User.DTOs.DetailUserDTO;
 import com.app.ellp.Module.User.DTOs.CreateUserDTO;
 import com.app.ellp.Module.User.Domain.User;
 import com.app.ellp.Module.User.Service.UserService;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@SecurityRequirement(name = "Bearer Auth")
 public class UserController extends BaseUserController implements UserDocumentation {
     @Autowired
     private UserService userService;

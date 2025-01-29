@@ -36,7 +36,7 @@ public class ColaboradorController extends BaseColaboradorController implements 
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<Object> getById(@PathVariable Long id) {
+    public ResponseEntity<Object> getById(@PathVariable String id) { 
         Colaborador colaborador = colaboradorService.findById(id);
 
         if(colaborador == null)
@@ -79,7 +79,7 @@ public class ColaboradorController extends BaseColaboradorController implements 
     }
 
     @DeleteMapping("/deleteById/{id}")
-    public ResponseEntity<Object> deleteById(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteById(@PathVariable String id) {
         Colaborador colaborador = colaboradorService.findById(id);
         if(colaborador == null)
             return ResponseEntity.notFound().build();
@@ -88,7 +88,7 @@ public class ColaboradorController extends BaseColaboradorController implements 
     }
 
     @PutMapping("/updateById/{id}")
-    public ResponseEntity<Object> updateById(@PathVariable Long id, @RequestBody CreateColaboradorDTO json) {
+    public ResponseEntity<Object> updateById(@PathVariable String id, @RequestBody CreateColaboradorDTO json) {
         if(colaboradorService.findById(id) == null)
             return ResponseEntity.notFound().build();
         Colaborador colaborador = colaboradorService.updateById(id, json);
@@ -96,8 +96,12 @@ public class ColaboradorController extends BaseColaboradorController implements 
             return ResponseEntity.badRequest().build();
 
         DetailColaboradorDTO response = new DetailColaboradorDTO(
-                colaborador.getId(), colaborador.getNome(), colaborador.getEmail(), colaborador.getRegistro(),
-                colaborador.getUser().getLogin(), colaborador.getUser().getRole()
+                colaborador.getId(),
+                colaborador.getNome(),
+                colaborador.getEmail(),
+                colaborador.getRegistro(),
+                colaborador.getUser().getLogin(),
+                colaborador.getUser().getRole()
         );
         return ResponseEntity.ok(response);
     }
