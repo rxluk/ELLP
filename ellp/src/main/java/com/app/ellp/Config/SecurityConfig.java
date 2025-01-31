@@ -1,13 +1,12 @@
 package com.app.ellp.Config;
 
+import com.app.ellp.Security.SecurityFilter;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.security.SecurityRequirement;
-import com.app.ellp.Security.SecurityFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +15,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,12 +26,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @SecurityScheme(
-    name = "Bearer Auth",
-    description = "JWT auth description",
-    scheme = "bearer",
-    type = SecuritySchemeType.HTTP,
-    bearerFormat = "JWT",
-    in = SecuritySchemeIn.HEADER
+        name = "Bearer Auth",
+        description = "JWT auth description",
+        scheme = "bearer",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        in = SecuritySchemeIn.HEADER
 )
 public class SecurityConfig {
 
@@ -47,8 +48,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf(csrf -> csrf.disable())
-                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
+                .csrf(AbstractHttpConfigurer::disable)
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         // Rotas permitidas a todos
@@ -63,6 +64,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/getAll").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/deleteById/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/updateById/**").hasRole("ADMIN")
+
+                        // Endpoints do UserController
+                        .requestMatchers(HttpMethod.GET, "/get/{login}").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/get/all").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/delete/{login}").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/put/{login}").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/get/all-with-password").authenticated()
 
                         // Qualquer outra rota requer autenticação
                         .anyRequest().authenticated()

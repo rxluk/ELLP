@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface ColaboradorRepository extends MongoRepository<Colaborador, String> {
     Optional<Colaborador> findByEmail(String email);
     Optional<Colaborador> findByRegistro(String registro);
+    Optional<Colaborador> findById(String id);
     List<Colaborador> findByNome(String nome);
 }

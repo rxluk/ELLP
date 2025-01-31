@@ -4,6 +4,7 @@ import com.app.ellp.Module.Colaborador.DTOs.CreateColaboradorDTO;
 import com.app.ellp.Module.Colaborador.DTOs.DetailColaboradorDTO;
 import com.app.ellp.Module.Colaborador.Domain.Colaborador;
 import com.app.ellp.Module.Colaborador.Service.ColaboradorService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "Bearer Auth")
 public class ColaboradorController extends BaseColaboradorController implements ColaboradorDocumentation {
     @Autowired
     private ColaboradorService colaboradorService;
