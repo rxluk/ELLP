@@ -22,7 +22,7 @@ public class Responsavel {
     @Size(min = 3, max = 255)
     private String nome;
     @Field
-    private Escolaridade escolaridade;
+    private Escolaridade escolaridade; // Ensino Médio, Ensino Superior, Incompleto/Completo
     private String emprego;
     private String celular;
     private boolean tipoResponsavel; // É mãe ou pai?
