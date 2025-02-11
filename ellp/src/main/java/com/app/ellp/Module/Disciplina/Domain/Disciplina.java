@@ -16,20 +16,19 @@ public class Disciplina {
     @DBRef
     private Escola escola;
 
-    // Construtor alterado para aceitar o ID da escola
+    public Disciplina() {}
+
     public Disciplina(String id, String nome, Escola escola) {
         this.id = id;
         this.nome = nome;
         this.escola = escola;
     }
 
-    // Construtor para criar a disciplina com o ID da escola diretamente
     public Disciplina(String nome, Escola escola) {
         this.nome = nome;
         this.escola = escola;
     }
 
-    // Getters e Setters
     public String getId() {
         return id;
     }
@@ -54,7 +53,6 @@ public class Disciplina {
         this.escola = escola;
     }
 
-    // Método para retornar apenas o ID da escola
     public String getEscolaId() {
         return escola != null ? escola.getId() : null;
     }
