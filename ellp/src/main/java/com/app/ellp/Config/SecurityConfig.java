@@ -72,6 +72,20 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/put/{login}").authenticated()
                         .requestMatchers(HttpMethod.GET, "/get/all-with-password").authenticated()
 
+                        // Endpoints do FamiliaController
+                        .requestMatchers(HttpMethod.GET, "/familia/{id}").authenticated()           // Buscar família por ID
+                        .requestMatchers(HttpMethod.GET, "/familia").authenticated()               // Buscar todas as famílias
+                        .requestMatchers(HttpMethod.POST, "/familia").authenticated()              // Criar nova família
+                        .requestMatchers(HttpMethod.PUT, "/familia/{id}").authenticated()          // Atualizar família
+                        .requestMatchers(HttpMethod.DELETE, "/familia/{id}").authenticated()       // Deletar família
+
+                        // Endpoints do ResponsavelController
+                        .requestMatchers(HttpMethod.GET, "/responsavel").authenticated()           // Buscar todos os responsáveis
+                        .requestMatchers(HttpMethod.GET, "/responsavel/{id}").authenticated()      // Buscar responsável por ID
+                        .requestMatchers(HttpMethod.POST, "/responsavel").authenticated()         // Criar responsável
+                        .requestMatchers(HttpMethod.PUT, "/responsavel/{id}").authenticated()     // Atualizar responsável
+                        .requestMatchers(HttpMethod.DELETE, "/responsavel/{id}").authenticated()  // Deletar responsável
+
                         // Qualquer outra rota requer autenticação
                         .anyRequest().authenticated()
                 )
