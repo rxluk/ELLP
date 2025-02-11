@@ -86,6 +86,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/responsavel/{id}").authenticated()     // Atualizar responsável
                         .requestMatchers(HttpMethod.DELETE, "/responsavel/{id}").authenticated()  // Deletar responsável
 
+                        // Endpoints do AlunoController
+                        .requestMatchers(HttpMethod.GET, "/aluno").authenticated()               // Buscar todos os alunos
+                        .requestMatchers(HttpMethod.GET, "/aluno/{id}").authenticated()          // Buscar aluno por ID
+                        .requestMatchers(HttpMethod.POST, "/aluno").authenticated()              // Criar aluno
+                        .requestMatchers(HttpMethod.PUT, "/aluno/{id}").authenticated()          // Atualizar aluno
+                        .requestMatchers(HttpMethod.DELETE, "/aluno/{id}").authenticated()       // Deletar aluno
+
                         // Qualquer outra rota requer autenticação
                         .anyRequest().authenticated()
                 )

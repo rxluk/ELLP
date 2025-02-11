@@ -14,14 +14,10 @@ import java.util.Optional;
 @Service
 public class ResponsavelService {
 
-    private final ResponsavelRepository responsavelRepository;
-    private final FamiliaRepository familiaRepository;
-
     @Autowired
-    public ResponsavelService(ResponsavelRepository responsavelRepository, FamiliaRepository familiaRepository) {
-        this.responsavelRepository = responsavelRepository;
-        this.familiaRepository = familiaRepository;
-    }
+    private ResponsavelRepository responsavelRepository;
+    @Autowired
+    private FamiliaRepository familiaRepository;
 
     // Criar novo responsável
     public Responsavel criarResponsavel(ResponsavelDTO responsavelDTO) {

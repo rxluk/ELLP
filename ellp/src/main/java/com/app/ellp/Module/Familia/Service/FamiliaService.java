@@ -14,12 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class FamiliaService {
 
-    private final FamiliaRepository familiaRepository;
-
     @Autowired
-    public FamiliaService(FamiliaRepository familiaRepository) {
-        this.familiaRepository = familiaRepository;
-    }
+    private FamiliaRepository familiaRepository;
 
     // Criar nova família
     public Familia criarFamilia(CreateFamiliaDTO createFamiliaDTO) {
