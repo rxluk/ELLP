@@ -55,20 +55,10 @@ public class EscolaService {
     }
 
     // Buscar escola por ID
-    public EscolaDTO buscarEscolaPorId(String id) {
+    public Escola buscarEscolaPorId(String id) {
         Optional<Escola> escola = escolaRepository.findById(id);
 
-        if (escola.isPresent()) {
-            return new EscolaDTO(
-                    escola.get().getId(),
-                    escola.get().getNome(),
-                    escola.get().getTelefone(),
-                    escola.get().getBairro(),
-                    escola.get().getRua(),
-                    escola.get().getNumero()
-            );
-        }
-
+        if (escola.isPresent()) escola.get();
         return null; // ou lançar exceção dependendo da necessidade
     }
 

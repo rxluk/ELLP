@@ -109,6 +109,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/disciplina/{id}").authenticated()           // Deletar disciplina
                         .requestMatchers(HttpMethod.GET, "/disciplina/nome/{nome}").authenticated()       // Buscar disciplina pelo nome
 
+                        // Endpoints do NotaController
+                        .requestMatchers(HttpMethod.GET, "/nota").authenticated()                  // Buscar todas as notas
+                        .requestMatchers(HttpMethod.GET, "/nota/{id}").authenticated()             // Buscar nota por ID
+                        .requestMatchers(HttpMethod.POST, "/nota").authenticated()                // Criar nova nota
+                        .requestMatchers(HttpMethod.PUT, "/nota/{id}").authenticated()            // Atualizar nota por ID
+                        .requestMatchers(HttpMethod.DELETE, "/nota/{id}").authenticated()         // Deletar nota por ID
 
                         // Qualquer outra rota requer autenticação
                         .anyRequest().authenticated()

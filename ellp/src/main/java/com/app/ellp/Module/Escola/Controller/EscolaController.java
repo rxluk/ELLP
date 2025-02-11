@@ -2,6 +2,7 @@ package com.app.ellp.Module.Escola.Controller;
 
 import com.app.ellp.Module.Escola.DTOs.CreateEscolaDTO;
 import com.app.ellp.Module.Escola.DTOs.EscolaDTO;
+import com.app.ellp.Module.Escola.Domain.Escola;
 import com.app.ellp.Module.Escola.Service.EscolaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,10 @@ public class EscolaController extends BaseEscolaController implements EscolaDocu
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<EscolaDTO> buscarEscolaPorId(@PathVariable String id) {
-        EscolaDTO escolaDTO = escolaService.buscarEscolaPorId(id);
-        if (escolaDTO != null) {
-            return ResponseEntity.ok(escolaDTO);
+    public ResponseEntity<Escola> buscarEscolaPorId(@PathVariable String id) {
+        Escola escola = escolaService.buscarEscolaPorId(id);
+        if (escola != null) {
+            return ResponseEntity.ok(escola);
         }
         return ResponseEntity.notFound().build();  // Retorna 404 se a escola não for encontrada
     }
