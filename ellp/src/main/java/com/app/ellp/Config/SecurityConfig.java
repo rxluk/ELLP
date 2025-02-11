@@ -101,6 +101,15 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/escola/{id}").authenticated()          // Deletar escola
                         .requestMatchers(HttpMethod.GET, "/escola/nome/{nome}").authenticated()      // Buscar escola pelo nome
 
+                        // Endpoints do DisciplinaController
+                        .requestMatchers(HttpMethod.GET, "/disciplina").authenticated()                   // Buscar todas as disciplinas
+                        .requestMatchers(HttpMethod.GET, "/disciplina/{id}").authenticated()              // Buscar disciplina por ID
+                        .requestMatchers(HttpMethod.POST, "/disciplina").authenticated()                 // Criar disciplina
+                        .requestMatchers(HttpMethod.PUT, "/disciplina/{id}").authenticated()              // Atualizar disciplina
+                        .requestMatchers(HttpMethod.DELETE, "/disciplina/{id}").authenticated()           // Deletar disciplina
+                        .requestMatchers(HttpMethod.GET, "/disciplina/nome/{nome}").authenticated()       // Buscar disciplina pelo nome
+
+
                         // Qualquer outra rota requer autenticação
                         .anyRequest().authenticated()
                 )
