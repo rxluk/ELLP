@@ -1,6 +1,7 @@
 package com.app.ellp.Module.Aluno.DTOs;
 
 import com.app.ellp.Module.Aluno.Domain.Aluno;
+import com.app.ellp.Module.Escola.Domain.Escola;
 import com.app.ellp.Module.Familia.Domain.Familia;
 
 import java.util.Date;
@@ -15,7 +16,8 @@ public record AlunoDTO(
         Date dataNascimento,
         boolean necessitaTransporte,
         boolean recebeAtendimentoMedico,
-        Familia familia
+        Familia familia,
+        Escola escola
 ) {
 
     // Método toDomain para converter AlunoDTO para Aluno (entidade)
@@ -30,7 +32,8 @@ public record AlunoDTO(
                 this.dataNascimento,
                 this.necessitaTransporte,
                 this.recebeAtendimentoMedico,
-                this.familia // A Família já está presente, assim como nos dados do DTO
+                this.familia,
+                this.escola
         );
         return aluno;
     }

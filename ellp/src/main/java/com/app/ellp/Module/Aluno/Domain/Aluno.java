@@ -1,5 +1,6 @@
 package com.app.ellp.Module.Aluno.Domain;
 
+import com.app.ellp.Module.Escola.Domain.Escola;
 import com.app.ellp.Module.Familia.Domain.Familia;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -21,16 +22,17 @@ public class Aluno {
     private Date dataNascimento;
     private boolean necessitaTransporte;
     private boolean recebeAtendimentoMedico;
-
     @DBRef
     private Familia familia;
+    @DBRef
+    private Escola escola;
 
     // Construtor vazio
     public Aluno() {}
 
     // Construtor com todos os parâmetros (com id como parâmetro)
     public Aluno(String id, String nome, String bairro, String rua, int numero, String serie, Date dataNascimento,
-                 boolean necessitaTransporte, boolean recebeAtendimentoMedico, Familia familia) {
+                 boolean necessitaTransporte, boolean recebeAtendimentoMedico, Familia familia, Escola escola) {
         this.id = id;
         this.nome = nome;
         this.bairro = bairro;
@@ -41,6 +43,7 @@ public class Aluno {
         this.necessitaTransporte = necessitaTransporte;
         this.recebeAtendimentoMedico = recebeAtendimentoMedico;
         this.familia = familia;
+        this.escola = escola;
     }
 
     // Getters e Setters
@@ -122,5 +125,13 @@ public class Aluno {
 
     public void setFamilia(Familia familia) {
         this.familia = familia;
+    }
+
+    public Escola getEscola() {
+        return escola;
+    }
+
+    public void setEscola(Escola escola) {
+        this.escola = escola;
     }
 }

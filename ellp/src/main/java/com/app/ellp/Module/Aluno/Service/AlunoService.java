@@ -29,7 +29,8 @@ public class AlunoService {
                 createAlunoDTO.dataNascimento(),
                 createAlunoDTO.necessitaTransporte(),
                 createAlunoDTO.recebeAtendimentoMedico(),
-                createAlunoDTO.familia()
+                createAlunoDTO.familia(),
+                createAlunoDTO.escola()
         );
 
         aluno = alunoRepository.save(aluno);
@@ -44,7 +45,8 @@ public class AlunoService {
                 aluno.getDataNascimento(),
                 aluno.isNecessitaTransporte(),
                 aluno.isRecebeAtendimentoMedico(),
-                aluno.getFamilia()
+                aluno.getFamilia(),
+                aluno.getEscola()
         );
     }
 
@@ -62,7 +64,8 @@ public class AlunoService {
                 aluno.getDataNascimento(),
                 aluno.isNecessitaTransporte(),
                 aluno.isRecebeAtendimentoMedico(),
-                aluno.getFamilia()
+                aluno.getFamilia(),
+                aluno.getEscola()
         )).collect(Collectors.toList());
     }
 
@@ -81,7 +84,8 @@ public class AlunoService {
                     aluno.get().getDataNascimento(),
                     aluno.get().isNecessitaTransporte(),
                     aluno.get().isRecebeAtendimentoMedico(),
-                    aluno.get().getFamilia()
+                    aluno.get().getFamilia(),
+                    aluno.get().getEscola()
             );
         }
 
@@ -116,7 +120,8 @@ public class AlunoService {
                     aluno.getDataNascimento(),
                     aluno.isNecessitaTransporte(),
                     aluno.isRecebeAtendimentoMedico(),
-                    aluno.getFamilia()
+                    aluno.getFamilia(),
+                    aluno.getEscola()
             );
         }
 
