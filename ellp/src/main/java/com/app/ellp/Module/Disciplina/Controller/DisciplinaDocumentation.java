@@ -2,6 +2,7 @@ package com.app.ellp.Module.Disciplina.Controller;
 
 import com.app.ellp.Module.Disciplina.DTOs.CreateDisciplinaDTO;
 import com.app.ellp.Module.Disciplina.DTOs.DisciplinaDTO;
+import com.app.ellp.Module.Disciplina.Domain.Disciplina;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -23,7 +24,7 @@ public interface DisciplinaDocumentation {
             @ApiResponse(responseCode = "200", description = "Detalhes da disciplina retornados com sucesso"),
             @ApiResponse(responseCode = "404", description = "Disciplina não encontrada")
     })
-    ResponseEntity<DisciplinaDTO> buscarDisciplinaPorId(@PathVariable String id);
+    ResponseEntity<Disciplina> buscarDisciplinaPorId(@PathVariable String id);
 
     @Operation(summary = "Cria uma nova disciplina", method = "POST")
     @ApiResponses(value = {

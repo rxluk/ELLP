@@ -42,7 +42,7 @@ public class NotaService {
 
     // Método auxiliar para obter a disciplina de forma eficiente
     private Disciplina getDisciplinaById(String disciplinaId) {
-        return disciplinaMapper.toDomain(disciplinaService.buscarDisciplinaPorId(disciplinaId)); // Retorna a disciplina diretamente
+        return disciplinaService.buscarDisciplinaPorId(disciplinaId); // Retorna a disciplina diretamente
     }
 
     // Método para criar uma nova Nota

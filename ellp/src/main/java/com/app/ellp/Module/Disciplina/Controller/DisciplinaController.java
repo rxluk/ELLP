@@ -2,6 +2,7 @@ package com.app.ellp.Module.Disciplina.Controller;
 
 import com.app.ellp.Module.Disciplina.DTOs.CreateDisciplinaDTO;
 import com.app.ellp.Module.Disciplina.DTOs.DisciplinaDTO;
+import com.app.ellp.Module.Disciplina.Domain.Disciplina;
 import com.app.ellp.Module.Disciplina.Service.DisciplinaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,10 @@ public class DisciplinaController extends BaseDisciplinaController implements Di
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<DisciplinaDTO> buscarDisciplinaPorId(@PathVariable String id) {
-        DisciplinaDTO disciplinaDTO = disciplinaService.buscarDisciplinaPorId(id);
-        if (disciplinaDTO != null) {
-            return ResponseEntity.ok(disciplinaDTO);
+    public ResponseEntity<Disciplina> buscarDisciplinaPorId(@PathVariable String id) {
+        Disciplina disciplina = disciplinaService.buscarDisciplinaPorId(id);
+        if (disciplina != null) {
+            return ResponseEntity.ok(disciplina);
         }
         return ResponseEntity.notFound().build(); // Retorna 404 se não encontrar
     }

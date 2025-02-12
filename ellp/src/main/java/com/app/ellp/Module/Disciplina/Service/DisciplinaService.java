@@ -65,14 +65,10 @@ public class DisciplinaService {
     }
 
     // Buscar disciplina por ID
-    public DisciplinaDTO buscarDisciplinaPorId(String id) {
+    public Disciplina buscarDisciplinaPorId(String id) {
         Optional<Disciplina> disciplina = disciplinaRepository.findById(id);
 
-        return disciplina.map(d -> new DisciplinaDTO(
-                d.getId(),
-                d.getNome(),
-                d.getEscolaId()
-        )).orElse(null); // ou lançar exceção dependendo da necessidade
+        return disciplina.get();
     }
 
     // Buscar disciplinas por nome
