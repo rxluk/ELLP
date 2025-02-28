@@ -1,0 +1,24 @@
+.campo-texto{
+    margin: 24px 0; /*margem de cima pra baixo 24, de um lado para outro 0*/
+    margin-right: 800px;
+}
+
+.campo-texto label{
+    display: block; /*quebra a linha*/
+    text-align: start;
+    margin-bottom: 8px;
+    font-size: 20px;
+    color: rgb(53, 53, 53)
+}
+
+.campo-texto input{
+    background-color: #dbdbdb;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
+    color:black;
+    width: 100%;
+
+    border: none;
+    padding: 24px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
